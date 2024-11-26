@@ -127,9 +127,10 @@ return {
 			setup = {},
 		},
 	},
-	{
+		{
 		"neovim/nvim-lspconfig",
-		opts = function()
+		opts = function(_, opts)
+			-- Extend the keymaps
 			local keys = require("lazyvim.plugins.lsp.keymaps").get()
 			vim.list_extend(keys, {
 				{
@@ -141,6 +142,33 @@ return {
 					has = "definition",
 				},
 			})
+
+			-- Define the on_attach function directly
+			opts.on_attach = function(client, bufnr)
+				-- Basic hover keymap
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Documentation" })
+
+				-- Trigger hover on CursorHold after 2 seconds
+				vim.api.nvim_create_autocmd("CursorHold", {
+					buffer = bufnr,
+					callback = function()
+						-- Only show hover if in a valid LSP context
+						local params = vim.lsp.util.make_position_params()
+						vim.lsp.buf_request(bufnr, "textDocument/hover", params, function(err, result, ctx, config)
+							if err or not result then
+								return
+							end
+							vim.lsp.util.focusable_float("hover", function()
+								vim.lsp.util.open_floating_preview(result.contents, "markdown", config)
+							end)
+						end)
+					end,
+				})
+			end
+
+			-- Ensure CursorHold triggers after 2 seconds
+			vim.o.updatetime = 2000
 		end,
 	},
+
 }
