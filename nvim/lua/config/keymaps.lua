@@ -102,12 +102,11 @@ keymap.set("n", "<C-kk>", function()
 	end)
 end, { noremap = true, silent = true, desc = "Go to definition, open in split" })
 
-keymap.set("n", "22", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
-keymap.set("n", "33", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
+keymap.set("n", "<C-1>", ":split | terminal ./mvnw spring-boot:run<CR>", { noremap = true, silent = true })
+keymap.set("n", "<C-2>", ":split | terminal mvn clean install -DskipTests=true<CR>", { noremap = true, silent = true })
+keymap.set("n", "<C-3>", ":split | terminal ./mvnw spring-boot:run<CR>", { noremap = true, silent = true })
 
--- restart lsp server (not on youtube nvim video)
 keymap.set("n", "rss", ":LspRestart<CR>")
--- Diagnostics
 keymap.set("n", "<C-j>", function()
 	vim.diagnostic.goto_next()
 end, opts)
