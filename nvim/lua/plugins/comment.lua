@@ -1,12 +1,18 @@
 return {
 	"numToStr/Comment.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"JoosepAlviste/nvim-ts-context-commentstring",
+	},
 	config = function()
-		require("Comment").setup()
+		vim.keymap.set("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", { desc = "Comment Line" })
+		vim.keymap.set("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Comment Selected" })
 
-		vim.keymap.set("n", "<C-.>", function()
-			return vim.v.count == 0 and "gcc" or "gc" .. vim.v.count
-		end, { expr = true, noremap = true, silent = true, desc = "Toggle comment" })
+		local comment = require("Comment")
+		local ts_context_comment_string = require("ts_context_commentstring.integrations.comment_nvim")
 
-		vim.keymap.set("x", "<C-.>", "gc", { noremap = true, silent = true, desc = "Toggle comment (visual)" })
+		comment.setup({
+			pre_hook = ts_context_comment_string.create_pre_hook(),
+		})
 	end,
 }

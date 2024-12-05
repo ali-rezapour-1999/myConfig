@@ -1,6 +1,6 @@
 return {
 	{
-		"Mofiqul/vscode.nvim",
+		"craftzdog/solarized-osaka.nvim",
 		lazy = false,
 		priority = 1000,
 		opts = {
@@ -10,9 +10,6 @@ return {
 				sidebars = "transparent",
 				floats = "dark",
 			},
-			day_brightness = 0.4,
-			hide_inactive_statusline = false,
-			dim_inactive = false,
 		},
 	},
 }

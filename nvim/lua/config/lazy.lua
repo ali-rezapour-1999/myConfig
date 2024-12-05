@@ -17,11 +17,7 @@ require("lazy").setup({
 			"LazyVim/LazyVim",
 			import = "lazyvim.plugins",
 			opts = {
-				colorscheme = "vscode",
-				news = {
-					lazyvim = true,
-					neovim = true,
-				},
+				colorscheme = "solarized-osaka",
 			},
 		},
 		{ import = "lazyvim.plugins.extras.linting.eslint" },
@@ -33,6 +29,8 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.sql" },
 		{ import = "lazyvim.plugins.extras.lang.java" },
 		{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+		{ import = "lazyvim.plugins.extras.lsp.none-ls" },
+
 		{ import = "plugins" },
 	},
 	defaults = {
@@ -51,7 +49,6 @@ require("lazy").setup({
 			disabled_plugins = {
 				"gzip",
 				"netrwPlugin",
-				"rplugin",
 				"tarPlugin",
 				"tohtml",
 				"tutor",

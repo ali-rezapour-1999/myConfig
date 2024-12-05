@@ -30,11 +30,13 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
+vim.opt.signcolumn = "yes"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.mouse = "a"
+vim.opt.termguicolors = true
 
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
-
-vim.opt.formatoptions:append({ "r" })
 
 if vim.fn.has("nvim-0.8") == 1 then
 	vim.opt.cmdheight = 0
